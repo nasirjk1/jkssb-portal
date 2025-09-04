@@ -1,0 +1,20 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+# SEO URLs
+RewriteRule ^post/([0-9]+)/([A-Za-z0-9\-_,]+)$ post.php?id=$1 [L,QSA]
+RewriteRule ^category/([A-Za-z0-9\-_,]+)$ category.php?slug=$1 [L,QSA]
+RewriteRule ^papers/([0-9]+)/([A-Za-z0-9\-_,]+)$ papers.php?id=$1 [L,QSA]
+
+# Security
+<FilesMatch "^(config\.php|install\.php)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+</IfModule>
+
+# Disable PHP in uploads
+<Directory "/uploads">
+    php_flag engine off
+</Directory>
